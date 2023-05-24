@@ -2,16 +2,17 @@
 using SFML.Graphics;
 using SFML.System;
 using AgarIO.scripts.Game;
+using Agar.io.scripts.Game_elements;
 
 namespace AgarIO.scripts.GameObjects.Food
 {
-    public class Food : GameObject
+    public class Food : GameObject, IMass
     {
-        public readonly int Mass;
+        private readonly int mass;
 
         public Food(int mass, Vector2f position)
         {
-            Mass = mass;
+            this.mass = mass;
             this.position = position;
         }
 
@@ -30,5 +31,11 @@ namespace AgarIO.scripts.GameObjects.Food
             Sprite.FillColor = Color.Green;
             Sprite.OutlineColor = Color.White;
         }
+
+        public int GetMass()
+            => mass;
+
+        public void GetEaten()
+            => Destroy();
     }
 }

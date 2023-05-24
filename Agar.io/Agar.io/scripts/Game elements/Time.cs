@@ -15,7 +15,7 @@ namespace AgarIO.scripts.GameElements.Time
         public static void ElapseTime()
         {
             deltaTime = (int)timer.ElapsedMilliseconds;
-            timer.Reset();
+            timer.Restart();
         }
     }
 }

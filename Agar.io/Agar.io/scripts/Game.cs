@@ -1,10 +1,10 @@
-﻿using AgarIO.scripts.GameElements.Time;
+using AgarIO.scripts.GameElements.Time;
 using AgarIO.scripts.GameObjects.Food;
 using AgarIO.scripts.GameElements.GameObject;
 using SFML.Graphics;
-using SFML.Window;
 using AgarIO.scripts.GameObjects.Player;
-using SFML.System;
+using Agar.io.scripts.Game_elements.PlayerInput;
+using SFML.Window;
 
 namespace AgarIO.scripts.Game
 {
@@ -12,14 +12,12 @@ namespace AgarIO.scripts.Game
     {
         private GameObjectLoop loop;
         
-        private RenderWindow window;
+        public RenderWindow window { get; private set; }
         public const uint windowWidth = 1600;
         public const uint windowHeight = 900;
 
         public Agario()
         {
-            window = new(new VideoMode(windowWidth, windowHeight), "Agar.io");
-
             loop = GameObjectLoop.GetInstance();
         }
 
@@ -27,13 +25,21 @@ namespace AgarIO.scripts.Game
         {
             STime.Innit();
 
+            CameraInnit();
             InnitObjects();
             GameLoop();
         }
 
+        private void CameraInnit()
+        {
+            window = new(new VideoMode(windowWidth, windowHeight), "Agar.io");
+            window.SetFramerateLimit(144);
+            window.Closed += WindowClosed;
+        }
+
         private void InnitObjects()
         {
-            Player.CreatePlayer();
+            Player.CreatePlayer(new PlayerMouseInput(window));
 
             for (int i = 0; i < 500; i++)
                 Food.CreateFood();
@@ -46,11 +52,18 @@ namespace AgarIO.scripts.Game
             while (isInGame)
             {
                 STime.ElapseTime();
+                window.DispatchEvents();
 
                 loop.InvokeAwake();
                 loop.InvokeUpdate();
                 loop.InvokeRender(window);
             }
+        }
+
+        private void WindowClosed(object sender, EventArgs e)
+        {
+            RenderWindow w = (RenderWindow)sender;
+            w.Close();
         }
     }
 }
