@@ -1,6 +1,5 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
 
 using Agar.io.scripts.Game_elements.Time;
 
@@ -51,13 +50,9 @@ namespace Gameobject
         private Queue<GameObject> awakeQueue = new();
         private Dictionary<int, GameObject> objects = new();
 
-        private RenderWindow window;
-
         private GameObjectLoop()
         {
             numOfObjects = 0;
-
-            window = new(new VideoMode(1600, 900), "Ping pong");
         }
 
         public static GameObjectLoop GetInstance()
@@ -84,11 +79,9 @@ namespace Gameobject
             {
                 obj.Update();
             }
-
-            InvokeRender();
         }
 
-        private void InvokeRender()
+        public void InvokeRender(RenderWindow window)
         {
             window.Clear(Color.Black);
 
