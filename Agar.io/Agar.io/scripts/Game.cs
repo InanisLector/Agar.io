@@ -3,6 +3,8 @@ using AgarIO.scripts.GameObjects.Food;
 using AgarIO.scripts.GameElements.GameObject;
 using SFML.Graphics;
 using SFML.Window;
+using AgarIO.scripts.GameObjects.Player;
+using SFML.System;
 
 namespace AgarIO.scripts.Game
 {
@@ -31,6 +33,8 @@ namespace AgarIO.scripts.Game
 
         private void InnitObjects()
         {
+            Player.CreatePlayer();
+
             for (int i = 0; i < 500; i++)
                 Food.CreateFood();
         }

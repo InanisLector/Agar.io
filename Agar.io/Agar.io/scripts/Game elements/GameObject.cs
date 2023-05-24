@@ -1,4 +1,4 @@
-﻿using SFML.Graphics;
+using SFML.Graphics;
 using SFML.System;
 
 namespace AgarIO.scripts.GameElements.GameObject
@@ -23,7 +23,7 @@ namespace AgarIO.scripts.GameElements.GameObject
             protected set
             {
                 _sprite = value;
-                pivot = value.Scale / 2;
+                pivot = -value.Scale / 2;
             }
         }
 
@@ -91,6 +91,7 @@ namespace AgarIO.scripts.GameElements.GameObject
 
         public void AddObject(GameObject obj)
         {
+            awakeQueue.Enqueue(obj);
             objects.Add(numOfObjects++, obj);
         }
 
