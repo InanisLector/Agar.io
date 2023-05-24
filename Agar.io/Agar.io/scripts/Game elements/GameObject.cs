@@ -1,4 +1,4 @@
-﻿using SFML.Graphics;
+using SFML.Graphics;
 using SFML.System;
 
 namespace AgarIO.scripts.GameElements.GameObject
@@ -10,8 +10,6 @@ namespace AgarIO.scripts.GameElements.GameObject
         public Vector2f position { get; protected set; }
         private Vector2f pivot;
         private Shape _sprite;
-
-        private bool isPhysicsOn;
 
         public Shape Sprite
         {
@@ -122,10 +120,5 @@ namespace AgarIO.scripts.GameElements.GameObject
 
             return list.ToArray();
         }
-    }
-
-    public static class GameObjectExtention
-    {
-
     }
 }
