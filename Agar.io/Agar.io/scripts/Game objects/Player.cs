@@ -13,7 +13,7 @@ namespace AgarIO.scripts.GameObjects.Player
     {
         private int mass = 100;
 
-        private const float constSpeed = 100f;
+        private const float constSpeed = 10f;
 
         private IInput inputSystem;
         private Vector2f input => inputSystem.GetInput();
