@@ -1,9 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 
-using Agar.io.scripts.Game_elements.Time;
-
-namespace Gameobject
+namespace AgarIO.scripts.GameElements.GameObject
 {
     public abstract class GameObject
     {
@@ -73,8 +71,6 @@ namespace Gameobject
 
         public void InvokeUpdate()
         {
-            STime.ElapseTime();
-
             foreach (var obj in objects.Values)
             {
                 obj.Update();

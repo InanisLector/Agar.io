@@ -1,12 +1,12 @@
-﻿using Agar.io.scripts.Game_elements.Time;
-using Agar.io.scripts.Game_objects.Food;
-using Gameobject;
+﻿using AgarIO.scripts.GameElements.Time;
+using AgarIO.scripts.GameObjects.Food;
+using AgarIO.scripts.GameElements.GameObject;
 using SFML.Graphics;
 using SFML.Window;
 
-namespace Agar.io.scripts.Game
+namespace AgarIO.scripts.Game
 {
-    public class AgarIO
+    public class Agario
     {
         private GameObjectLoop loop;
         
@@ -14,7 +14,7 @@ namespace Agar.io.scripts.Game
         public const uint windowWidth = 1600;
         public const uint windowHeight = 900;
 
-        public AgarIO()
+        public Agario()
         {
             window = new(new VideoMode(windowWidth, windowHeight), "Agar.io");
 
@@ -41,6 +41,8 @@ namespace Agar.io.scripts.Game
 
             while (isInGame)
             {
+                STime.ElapseTime();
+
                 loop.InvokeAwake();
                 loop.InvokeUpdate();
                 loop.InvokeRender(window);

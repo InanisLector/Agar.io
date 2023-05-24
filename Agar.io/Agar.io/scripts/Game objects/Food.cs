@@ -1,9 +1,9 @@
-﻿using Gameobject;
+﻿using AgarIO.scripts.GameElements.GameObject;
 using SFML.Graphics;
 using SFML.System;
-using Agar.io.scripts.Game;
+using AgarIO.scripts.Game;
 
-namespace Agar.io.scripts.Game_objects.Food
+namespace AgarIO.scripts.GameObjects.Food
 {
     public class Food : GameObject
     {
@@ -23,7 +23,7 @@ namespace Agar.io.scripts.Game_objects.Food
         {
             Random rand = new();
 
-            return new Food(rand.Next(10, 20), new Vector2f(rand.Next((int)AgarIO.windowWidth), rand.Next((int)AgarIO.windowHeight)));
+            return new Food(rand.Next(10, 20), new Vector2f(rand.Next((int)Agario.windowWidth), rand.Next((int)Agario.windowHeight)));
         }
     }
 }

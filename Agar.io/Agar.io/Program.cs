@@ -1,4 +1,4 @@
-﻿using Agar.io.scripts.Game;
+﻿using AgarIO.scripts.Game;
 
 namespace Program
 {
@@ -6,7 +6,7 @@ namespace Program
     {
         private static void Main(string[] args)
         {
-            new AgarIO().StartGame();
+            new Agario().StartGame();
         }
     }
 }

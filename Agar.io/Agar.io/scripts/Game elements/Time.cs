@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Agar.io.scripts.Game_elements.Time
+namespace AgarIO.scripts.GameElements.Time
 {
     public static class STime
     {
