@@ -1,9 +1,9 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using Agar.io.scripts.Extentions.Vector2Extention;
+using AgarIO.scripts.GameEngine;
 
-namespace Agar.io.scripts.Game_elements.PlayerInput
+namespace AgarIO.scripts.Game
 {
     public class PlayerMouseInput : IInput
     {

@@ -1,11 +1,6 @@
 ﻿using SFML.System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Agar.io.scripts.Extentions.Vector2Extention
+namespace AgarIO.scripts.GameEngine
 {
     public static class Vector2fExtention
     {

@@ -1,4 +1,4 @@
-﻿namespace Agar.io.scripts.Game_elements
+﻿namespace AgarIO.scripts.Game
 {
     public interface IMass
     {

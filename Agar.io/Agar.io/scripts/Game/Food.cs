@@ -1,10 +1,8 @@
-﻿using AgarIO.scripts.GameElements.GameObject;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
-using AgarIO.scripts.Game;
-using Agar.io.scripts.Game_elements;
+using AgarIO.scripts.GameEngine;
 
-namespace AgarIO.scripts.GameObjects.Food
+namespace AgarIO.scripts.Game
 {
     public class Food : GameObject, IMass
     {
@@ -20,7 +18,7 @@ namespace AgarIO.scripts.GameObjects.Food
         {
             Random rand = new();
 
-            return new Food(rand.Next(10, 20), new Vector2f(rand.Next((int)Agario.windowWidth), rand.Next((int)Agario.windowHeight)));
+            return new Food(rand.Next(10, 20), new Vector2f(rand.Next((int)Game.windowWidth), rand.Next((int)Game.windowHeight)));
         }
 
         public override void Awake()

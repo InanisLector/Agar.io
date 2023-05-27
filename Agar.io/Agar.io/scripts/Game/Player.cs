@@ -1,13 +1,8 @@
-﻿using Agar.io.scripts.Game_elements;
-using Agar.io.scripts.Game_elements.PlayerInput;
-using AgarIO.scripts.Game;
-using AgarIO.scripts.GameElements.GameObject;
-using AgarIO.scripts.GameElements.Time;
+﻿using AgarIO.scripts.GameEngine;
 using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
 
-namespace AgarIO.scripts.GameObjects.Player
+namespace AgarIO.scripts.Game
 {
     public class Player : GameObject, IMass
     {
@@ -28,7 +23,7 @@ namespace AgarIO.scripts.GameObjects.Player
         {
             Random rand = new();
 
-            return new Player(new Vector2f(rand.Next((int)Agario.windowWidth), rand.Next((int)Agario.windowHeight)), inputSystem);
+            return new Player(new Vector2f(rand.Next((int)Game.windowWidth), rand.Next((int)Game.windowHeight)), inputSystem);
         }
 
         public override void Awake()
@@ -95,16 +90,16 @@ namespace AgarIO.scripts.GameObjects.Player
                 0 :
                 currentPosition.X;
 
-            currentPosition.X = currentPosition.X > Agario.windowWidth ?
-                Agario.windowWidth :
+            currentPosition.X = currentPosition.X > Game.windowWidth ?
+                Game.windowWidth :
                 currentPosition.X;
 
             currentPosition.Y = currentPosition.Y < 0 ?
                 0 :
                 currentPosition.Y;
 
-            currentPosition.Y = currentPosition.Y > Agario.windowHeight ?
-                Agario.windowWidth :
+            currentPosition.Y = currentPosition.Y > Game.windowHeight ?
+                Game.windowWidth :
                 currentPosition.Y;
 
             return currentPosition;

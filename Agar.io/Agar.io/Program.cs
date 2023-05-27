@@ -6,7 +6,7 @@ namespace Program
     {
         private static void Main(string[] args)
         {
-            new Agario().StartGame();
+            new Game().StartGame(new AgarIOScene());
         }
     }
 }

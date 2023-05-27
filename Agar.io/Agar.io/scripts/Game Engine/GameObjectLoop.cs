@@ -1,51 +1,7 @@
-using SFML.Graphics;
-using SFML.System;
+﻿using SFML.Graphics;
 
-namespace AgarIO.scripts.GameElements.GameObject
+namespace AgarIO.scripts.GameEngine
 {
-    public abstract class GameObject
-    {
-        private int id;
-
-        public Vector2f position { get; protected set; }
-        private Vector2f pivot;
-        private Shape _sprite;
-
-        public Shape Sprite
-        {
-            get
-            {
-                _sprite.Position = position - pivot;
-                return _sprite;
-            }
-            protected set
-            {
-                _sprite = value;
-                pivot = value.Scale / 2;
-            }
-        }
-
-        protected GameObject()
-        {
-            GameObjectLoop.GetInstance().AddObject(this, out id);
-        }
-
-        public virtual void Awake() { }
-        public virtual void Update() { }
-        protected void Destroy()
-        {
-            GameObjectLoop.GetInstance().RemoveObject(id);
-        }
-
-        public bool CheckCollision(GameObject obj)
-        {
-            FloatRect rect1 = this.Sprite.GetGlobalBounds();
-            FloatRect rect2 = obj.Sprite.GetGlobalBounds();
-
-            return rect1.Intersects(rect2);
-        }
-    }
-
     public class GameObjectLoop
     {
         private static GameObjectLoop? instance;
@@ -61,7 +17,7 @@ namespace AgarIO.scripts.GameElements.GameObject
 
         public static GameObjectLoop GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
                 instance = new GameObjectLoop();
 
             return instance;
@@ -113,8 +69,8 @@ namespace AgarIO.scripts.GameElements.GameObject
 
             foreach (GameObject insideObj in objects.Values)
             {
-                if(obj.CheckCollision(insideObj))
-                    if(obj != insideObj)
+                if (obj.CheckCollision(insideObj))
+                    if (obj != insideObj)
                         list.Add(insideObj);
             }
 
