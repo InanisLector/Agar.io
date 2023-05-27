@@ -23,7 +23,7 @@ namespace AgarIO.scripts.Game
         {
             Random rand = new();
 
-            return new Player(new Vector2f(rand.Next((int)Game.windowWidth), rand.Next((int)Game.windowHeight)), inputSystem);
+            return new Player(new Vector2f(rand.Next((int)GameEngine.Game.windowWidth), rand.Next((int)GameEngine.Game.windowWidth)), inputSystem);
         }
 
         public override void Awake()
@@ -90,16 +90,16 @@ namespace AgarIO.scripts.Game
                 0 :
                 currentPosition.X;
 
-            currentPosition.X = currentPosition.X > Game.windowWidth ?
-                Game.windowWidth :
+            currentPosition.X = currentPosition.X > GameEngine.Game.windowWidth ?
+                GameEngine.Game.windowWidth :
                 currentPosition.X;
 
             currentPosition.Y = currentPosition.Y < 0 ?
                 0 :
                 currentPosition.Y;
 
-            currentPosition.Y = currentPosition.Y > Game.windowHeight ?
-                Game.windowWidth :
+            currentPosition.Y = currentPosition.Y > GameEngine.Game.windowHeight ?
+                GameEngine.Game.windowWidth :
                 currentPosition.Y;
 
             return currentPosition;

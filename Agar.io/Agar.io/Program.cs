@@ -1,4 +1,5 @@
-﻿using AgarIO.scripts.Game;
+﻿using AgarIO.scripts.GameEngine;
+using AgarIO.scripts.Game;
 
 namespace Program
 {

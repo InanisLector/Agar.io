@@ -1,4 +1,4 @@
-﻿using AgarIO.scripts.GameEngine;
+using AgarIO.scripts.GameEngine;
 
 namespace AgarIO.scripts.Game
 {

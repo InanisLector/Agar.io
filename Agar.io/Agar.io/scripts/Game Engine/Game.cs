@@ -2,7 +2,7 @@ using AgarIO.scripts.GameEngine;
 using SFML.Graphics;
 using SFML.Window;
 
-namespace AgarIO.scripts.Game
+namespace AgarIO.scripts.GameEngine
 {
     public class Game
     {

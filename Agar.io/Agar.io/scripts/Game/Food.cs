@@ -18,7 +18,7 @@ namespace AgarIO.scripts.Game
         {
             Random rand = new();
 
-            return new Food(rand.Next(10, 20), new Vector2f(rand.Next((int)Game.windowWidth), rand.Next((int)Game.windowHeight)));
+            return new Food(rand.Next(1, 5), new Vector2f(rand.Next((int)GameEngine.Game.windowWidth), rand.Next((int)GameEngine.Game.windowHeight)));
         }
 
         public override void Awake()

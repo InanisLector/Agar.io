@@ -45,6 +45,9 @@ namespace AgarIO.scripts.GameEngine
 
             foreach (GameObject obj in objects.Values)
             {
+                if (!obj.IsRendered)
+                    continue;
+
                 window.Draw(obj.Sprite);
             }
 
@@ -69,6 +72,9 @@ namespace AgarIO.scripts.GameEngine
 
             foreach (GameObject insideObj in objects.Values)
             {
+                if (!insideObj.IsCollideable)
+                    continue;
+
                 if (obj.CheckCollision(insideObj))
                     if (obj != insideObj)
                         list.Add(insideObj);

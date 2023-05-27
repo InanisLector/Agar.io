@@ -11,6 +11,9 @@ namespace AgarIO.scripts.GameEngine
         private Vector2f pivot;
         private Shape _sprite;
 
+        public bool IsRendered { get; protected set; } = true;
+        public bool IsCollideable { get; protected set; } = true;
+
         public Shape Sprite
         {
             get
