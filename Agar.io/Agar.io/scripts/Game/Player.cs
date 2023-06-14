@@ -63,8 +63,6 @@ namespace AgarIO.scripts.Game
 
                     Sprite = CreateScaledSprite(this.mass / 10f);
 
-                    Console.WriteLine(Sprite.Scale);
-
                     ((IMass)obj).GetEaten();
                 }
             }

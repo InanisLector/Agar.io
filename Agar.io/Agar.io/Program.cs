@@ -7,7 +7,7 @@ namespace Program
     {
         private static void Main(string[] args)
         {
-            new Game().StartGame(new AgarIOScene());
+            Game.CrateNew(new AgarIOScene()).Start();
         }
     }
 }

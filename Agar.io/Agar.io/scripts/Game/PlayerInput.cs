@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using AgarIO.scripts.GameEngine;
+using AgarIO.scripts.GameEngine.Input;
 
 namespace AgarIO.scripts.Game
 {
@@ -18,7 +19,13 @@ namespace AgarIO.scripts.Game
             => GetMouseInput();
 
         private Vector2f GetMouseInput()
-            => ((Vector2f)(Mouse.GetPosition(_window) - (Vector2i)_window.Size / 2)).Normalize();
+        {
+            Vector2f cur = ((Vector2f)(InputSystem.MousePosition - (Vector2i)_window.Size / 2)).Normalize();
+
+            Console.WriteLine(cur);
+                
+            return cur;
+        }
     }
 
     public interface IInput

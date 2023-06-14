@@ -1,4 +1,4 @@
-using AgarIO.scripts.GameEngine;
+﻿using AgarIO.scripts.GameEngine;
 
 namespace AgarIO.scripts.Game
 {
@@ -6,7 +6,8 @@ namespace AgarIO.scripts.Game
     {
         public void StartScene()
         {
-            Player.CreatePlayer(new PlayerMouseInput(Game.window));
+            var mc = Player.CreatePlayer(new PlayerMouseInput(GameEngine.Game.window));
+            new Camera(mc, 1280, 720);
 
             for (int i = 0; i < 500; i++)
                 Food.CreateFood();
