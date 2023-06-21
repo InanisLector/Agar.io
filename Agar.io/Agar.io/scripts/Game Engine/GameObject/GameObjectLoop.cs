@@ -82,5 +82,29 @@ namespace AgarIO.scripts.GameEngine
 
             return list.ToArray();
         }
+
+        public GameObject? GetFirstWithTag(string tag)
+        {
+            foreach (var obj in objects.Values)
+            {
+                if(obj.ContainsTag(tag))
+                    return obj;
+            }
+
+            return null;
+        }
+
+        public GameObject[] GetAllWithTag(string tag)
+        {
+            List<GameObject> output = new();
+
+            foreach (var obj in objects.Values)
+            {
+                if (obj.ContainsTag(tag))
+                    output.Add(obj);
+            }
+
+            return output.ToArray();
+        }
     }
 }

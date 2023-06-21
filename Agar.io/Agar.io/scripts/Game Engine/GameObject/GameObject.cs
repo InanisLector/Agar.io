@@ -6,13 +6,16 @@ namespace AgarIO.scripts.GameEngine
     public abstract class GameObject
     {
         private int id;
+        protected List<string> tags;
 
         public Vector2f position { get; protected set; }
         private Vector2f pivot;
-        private Shape _sprite;
+        private Shape? _sprite;
 
-        public bool IsRendered { get; protected set; } = true;
-        public bool IsCollideable { get; protected set; } = true;
+        public bool IsRendered 
+            { get; protected set; } = true;
+        public bool IsCollideable 
+            { get; protected set; } = true;
 
         public Shape Sprite
         {
@@ -46,6 +49,17 @@ namespace AgarIO.scripts.GameEngine
             FloatRect rect2 = obj.Sprite.GetGlobalBounds();
 
             return rect1.Intersects(rect2);
+        }
+
+        public bool ContainsTag(string tag)
+        {
+            foreach (var _tag in tags)
+            {
+                if(_tag == tag)
+                    return true;
+            }
+
+            return false;
         }
     }
 }
