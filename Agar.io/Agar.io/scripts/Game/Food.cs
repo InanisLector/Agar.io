@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using AgarIO.scripts.GameEngine;
+using Random = AgarIO.scripts.GameEngine.Random;
 
 namespace AgarIO.scripts.Game
 {
@@ -12,13 +13,13 @@ namespace AgarIO.scripts.Game
         {
             this.mass = mass;
             this.position = position;
+
+            tags.Add("food");
         }
 
         public static Food CreateFood()
         {
-            Random rand = new();
-
-            return new Food(rand.Next(1, 5), new Vector2f(rand.Next((int)GameEngine.Game.windowWidth), rand.Next((int)GameEngine.Game.windowHeight)));
+            return new Food(Random.Int(1, 5), new Vector2f(Random.Int((int)GameEngine.Game.windowWidth), Random.Int((int)GameEngine.Game.windowHeight)));
         }
 
         public override void Awake()
@@ -34,6 +35,9 @@ namespace AgarIO.scripts.Game
             => mass;
 
         public void GetEaten()
-            => Destroy();
+        {
+            CreateFood();
+            Destroy();
+        }
     }
 }

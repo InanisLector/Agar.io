@@ -1,6 +1,7 @@
 ﻿using AgarIO.scripts.GameEngine;
 using SFML.Graphics;
 using SFML.System;
+using Random = AgarIO.scripts.GameEngine.Random;
 
 namespace AgarIO.scripts.Game
 {
@@ -11,19 +12,20 @@ namespace AgarIO.scripts.Game
         private const float constSpeed = 10f;
 
         private IInput inputSystem;
-        private Vector2f input => inputSystem.GetInput();
+        private Vector2f input
+            => inputSystem.GetInput();
 
         public Player(Vector2f position, IInput inputSystem)
         {
             this.position = position;
             this.inputSystem = inputSystem;
+
+            tags.Add("player");
         }
 
         public static Player CreatePlayer(IInput inputSystem)
         {
-            Random rand = new();
-
-            return new Player(new Vector2f(rand.Next((int)GameEngine.Game.windowWidth), rand.Next((int)GameEngine.Game.windowWidth)), inputSystem);
+            return new Player(new Vector2f(Random.Int((int)GameEngine.Game.windowWidth), Random.Int((int)GameEngine.Game.windowWidth)), inputSystem);
         }
 
         public override void Awake()
@@ -97,7 +99,7 @@ namespace AgarIO.scripts.Game
                 currentPosition.Y;
 
             currentPosition.Y = currentPosition.Y > GameEngine.Game.windowHeight ?
-                GameEngine.Game.windowWidth :
+                GameEngine.Game.windowHeight :
                 currentPosition.Y;
 
             return currentPosition;

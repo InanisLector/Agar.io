@@ -55,9 +55,7 @@ namespace AgarIO.scripts.GameEngine
                 STime.ElapseTime();
                 window.DispatchEvents();
 
-                loop.InvokeAwake();
-                loop.InvokeUpdate();
-                loop.InvokeRender(window);
+                loop.InvokeCycleTurn();
             }
         }
 

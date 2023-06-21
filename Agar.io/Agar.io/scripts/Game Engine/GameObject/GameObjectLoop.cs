@@ -6,14 +6,11 @@ namespace AgarIO.scripts.GameEngine
     {
         private static GameObjectLoop? instance;
 
-        private int numOfObjects;
         private Queue<GameObject> awakeQueue = new();
-        private Dictionary<int, GameObject> objects = new();
+        private Queue<GameObject> deleteQueue = new();
+        private List<GameObject> objects = new();
 
-        private GameObjectLoop()
-        {
-            numOfObjects = 0;
-        }
+        private GameObjectLoop() { }
 
         public static GameObjectLoop GetInstance()
         {
@@ -23,27 +20,30 @@ namespace AgarIO.scripts.GameEngine
             return instance;
         }
 
-        public void InvokeAwake()
+        private void InvokeAwake()
         {
             while (awakeQueue.Count > 0)
             {
-                awakeQueue.Dequeue().Awake();
+                var obj = awakeQueue.Dequeue();
+                objects.Add(obj);
+                obj.CallAwake();
             }
         }
 
-        public void InvokeUpdate()
+        private void InvokeUpdate()
         {
-            foreach (var obj in objects.Values)
+            foreach (var obj in objects)
             {
-                obj.Update();
+                obj.CallUpdate();
             }
         }
 
-        public void InvokeRender(RenderWindow window)
+        private void InvokeRender()
         {
+            var window = Game.window;
             window.Clear(Color.Black);
 
-            foreach (GameObject obj in objects.Values)
+            foreach (GameObject obj in objects)
             {
                 if (!obj.IsRendered)
                     continue;
@@ -54,23 +54,37 @@ namespace AgarIO.scripts.GameEngine
             window.Display();
         }
 
-        public void AddObject(GameObject obj, out int id)
+        private void InvokeDeletion()
         {
-            awakeQueue.Enqueue(obj);
-            id = numOfObjects;
-            objects.Add(numOfObjects++, obj);
+            while (deleteQueue.Count > 0)
+            {
+                objects.Remove(deleteQueue.Dequeue());
+            }
         }
 
-        public void RemoveObject(int id)
+        public void InvokeCycleTurn()
         {
-            objects.Remove(id);
+            InvokeAwake();
+            InvokeUpdate();
+            InvokeRender();
+            InvokeDeletion();
+        }
+
+        public void AddObject(GameObject obj)
+        {
+            awakeQueue.Enqueue(obj);
+        }
+
+        public void RemoveObject(GameObject obj)
+        {
+            deleteQueue.Enqueue(obj);
         }
 
         public GameObject[] GetCollisions(GameObject obj)
         {
             List<GameObject> list = new();
 
-            foreach (GameObject insideObj in objects.Values)
+            foreach (GameObject insideObj in objects)
             {
                 if (!insideObj.IsCollideable)
                     continue;
@@ -85,7 +99,7 @@ namespace AgarIO.scripts.GameEngine
 
         public GameObject? GetFirstWithTag(string tag)
         {
-            foreach (var obj in objects.Values)
+            foreach (var obj in objects)
             {
                 if(obj.ContainsTag(tag))
                     return obj;
@@ -98,7 +112,7 @@ namespace AgarIO.scripts.GameEngine
         {
             List<GameObject> output = new();
 
-            foreach (var obj in objects.Values)
+            foreach (var obj in objects)
             {
                 if (obj.ContainsTag(tag))
                     output.Add(obj);

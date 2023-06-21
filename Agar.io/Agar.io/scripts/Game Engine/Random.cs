@@ -1,4 +1,4 @@
-﻿namespace Agar.io.scripts.GameEngine
+﻿namespace AgarIO.scripts.GameEngine
 {
     public static class Random
     {

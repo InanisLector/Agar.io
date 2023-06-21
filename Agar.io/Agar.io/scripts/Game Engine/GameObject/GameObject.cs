@@ -5,8 +5,7 @@ namespace AgarIO.scripts.GameEngine
 {
     public abstract class GameObject
     {
-        private int id;
-        protected List<string> tags;
+        protected List<string> tags = new();
 
         public Vector2f position { get; protected set; }
         private Vector2f pivot;
@@ -16,6 +15,8 @@ namespace AgarIO.scripts.GameEngine
             { get; protected set; } = true;
         public bool IsCollideable 
             { get; protected set; } = true;
+
+        protected bool IsDead = false;
 
         public Shape Sprite
         {
@@ -33,14 +34,34 @@ namespace AgarIO.scripts.GameEngine
 
         protected GameObject()
         {
-            GameObjectLoop.GetInstance().AddObject(this, out id);
+            GameObjectLoop.GetInstance().AddObject(this);
         }
 
-        public virtual void Awake() { }
-        public virtual void Update() { }
+        public void CallAwake()
+        {
+            if (IsDead)
+                return;
+
+            Awake();
+        }
+
+        protected virtual void Awake() { }
+
+        public void CallUpdate()
+        {
+            if (IsDead)
+                return;
+
+            Update();
+        }
+
+        protected virtual void Update() { }
+
         protected void Destroy()
         {
-            GameObjectLoop.GetInstance().RemoveObject(id);
+            IsDead = true;
+
+            GameObjectLoop.GetInstance().RemoveObject(this);
         }
 
         public bool CheckCollision(GameObject obj)

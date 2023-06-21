@@ -1,6 +1,5 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
 using AgarIO.scripts.GameEngine;
 using AgarIO.scripts.GameEngine.Input;
 
