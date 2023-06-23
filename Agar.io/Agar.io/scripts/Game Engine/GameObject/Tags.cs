@@ -7,9 +7,6 @@
         public new T this[int index]
             => base[index];
 
-        public static Type Type
-            => typeof(T);
-
         public static Tags<T> operator +(Tags<T> tags, T tag)
         {
             tags.Add(tag);
