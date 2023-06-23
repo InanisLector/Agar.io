@@ -1,3 +1,4 @@
+using AgarIO.scripts.GameEngine.Input;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -24,7 +25,7 @@ namespace AgarIO.scripts.GameEngine
         {
             this.scene = scene; 
 
-            loop = GameObjectLoop.GetInstance();
+            loop = GameObjectLoop.Instance;
         }
 
         public void Start()
@@ -54,6 +55,7 @@ namespace AgarIO.scripts.GameEngine
             {
                 STime.ElapseTime();
                 window.DispatchEvents();
+                InputSystem.CheckInput();
 
                 loop.InvokeCycleTurn();
             }
