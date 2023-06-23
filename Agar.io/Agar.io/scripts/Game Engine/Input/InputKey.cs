@@ -9,18 +9,14 @@ namespace AgarIO.scripts.GameEngine.Input
         private Keyboard.Key key;
         private bool wasPressed;
 
-        private List<Action> keyDownActions;
-        private List<Action> keyPressedActions;
-        private List<Action> keyUpActions;
+        private Action keyDownActions;
+        private Action keyPressedActions;
+        private Action keyUpActions;
 
         public InputKey(Keyboard.Key _key)
         {
             key = _key;
             wasPressed = false;
-
-            keyDownActions = new();
-            keyPressedActions = new();
-            keyUpActions = new();
         }
 
         public void CheckInputs()
@@ -67,12 +63,12 @@ namespace AgarIO.scripts.GameEngine.Input
         }
 
         public void AddKeyDownAction(Action action)
-            => keyDownActions.Add(action);
+            => keyDownActions += action;
 
         public void AddKeyPressedAction(Action action)
-            => keyPressedActions.Add(action);
+            => keyPressedActions += action;
 
         public void AddKeyUpAction(Action action)
-            => keyUpActions.Add(action);
+            => keyUpActions += action;
     }
 }
