@@ -4,21 +4,25 @@ namespace AgarIO.scripts.GameEngine
 {
     public class GameObjectLoop
     {
-        private static GameObjectLoop? instance;
+        private static GameObjectLoop? _instance;
+        public static GameObjectLoop Instance
+        {
+            get {
+                if (_instance == null)
+                    _instance = new GameObjectLoop();
+
+                return _instance;
+            }
+
+            set { }
+        }
 
         private Queue<GameObject> awakeQueue = new();
         private Queue<GameObject> deleteQueue = new();
         private List<GameObject> objects = new();
+        private List<MeshRenderer> meshesToRender = new();
 
         private GameObjectLoop() { }
-
-        public static GameObjectLoop GetInstance()
-        {
-            if (instance == null)
-                instance = new GameObjectLoop();
-
-            return instance;
-        }
 
         private void InvokeAwake()
         {
@@ -70,15 +74,61 @@ namespace AgarIO.scripts.GameEngine
             InvokeDeletion();
         }
 
+        #region GameObject add|remove
+
+        public static GameObjectLoop operator +(GameObjectLoop loop, GameObject obj)
+        {
+            loop.AddObject(obj);
+
+            return loop;
+        }
+
         public void AddObject(GameObject obj)
         {
             awakeQueue.Enqueue(obj);
+        }
+
+        public static GameObjectLoop operator -(GameObjectLoop loop, GameObject obj)
+        {
+            loop.RemoveObject(obj);
+
+            return loop;
         }
 
         public void RemoveObject(GameObject obj)
         {
             deleteQueue.Enqueue(obj);
         }
+
+        #endregion
+
+        #region Mesh add|remove
+
+        public static GameObjectLoop operator +(GameObjectLoop loop, MeshRenderer mesh)
+        {
+            loop.AddMesh(mesh);
+
+            return loop;
+        }
+
+        public void AddMesh(MeshRenderer mesh)
+        {
+            meshesToRender.Add(mesh);
+        }
+
+        public static GameObjectLoop operator -(GameObjectLoop loop, MeshRenderer mesh)
+        {
+            loop.RemoveMesh(mesh);
+
+            return loop;
+        }
+
+        public void RemoveMesh(MeshRenderer mesh)
+        {
+            meshesToRender.Remove(mesh);
+        }
+
+        #endregion
 
         public GameObject[] GetCollisions(GameObject obj)
         {
