@@ -39,28 +39,13 @@ namespace AgarIO.scripts.GameEngine.Input
         }
 
         private void InvokeKeyDownActions()
-        {
-            foreach (var action in keyDownActions)
-            {
-                action.Invoke();
-            }
-        }
+            => keyDownActions?.Invoke();
 
         private void InvokeKeyPressedActions()
-        {
-            foreach (var action in keyPressedActions)
-            {
-                action.Invoke();
-            }
-        }
+            => keyPressedActions?.Invoke();
 
         private void InvokeKeyUpActions()
-        {
-            foreach (var action in keyUpActions)
-            {
-                action.Invoke();
-            }
-        }
+            => keyUpActions?.Invoke();
 
         public void AddKeyDownAction(Action action)
             => keyDownActions += action;
